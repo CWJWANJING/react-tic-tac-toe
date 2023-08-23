@@ -1,12 +1,23 @@
-function Square({XorO}) {
-  return <button className="square">{XorO}</button>;
+import { useState } from 'react';
+
+function Square() {
+  const [XorO, setXorO] = useState(null);
+  
+  function handleClick() {
+    setXorO("X");
+  }
+  return (
+    <button
+      className="square"
+      onClick={handleClick}>{XorO}
+    </button>);
 }
 
 export default function Board() {
   return (
     <>
       <div className="board-row">
-        <Square XorO="X"/>
+        <Square />
         <Square />
         <Square />
       </div>
