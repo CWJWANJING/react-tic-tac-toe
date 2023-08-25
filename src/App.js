@@ -8,13 +8,34 @@ function Square({value, onSquareClick}) {
     </button>);
 }
 
+function checkWinner(nextSquares) {
+
+  if (
+    (nextSquares[0] && nextSquares[0] == nextSquares[1] && nextSquares[1] == nextSquares[2]) ||
+    (nextSquares[3] && nextSquares[3] == nextSquares[4] && nextSquares[4] == nextSquares[5]) ||
+    (nextSquares[6] && nextSquares[6] == nextSquares[7] && nextSquares[7] == nextSquares[8]) ||
+    (nextSquares[0] && nextSquares[0] == nextSquares[3] && nextSquares[3] == nextSquares[6]) ||
+    (nextSquares[1] && nextSquares[1] == nextSquares[4] && nextSquares[4] == nextSquares[7]) ||
+    (nextSquares[2] && nextSquares[2] == nextSquares[5] && nextSquares[5] == nextSquares[8]) ||
+    (nextSquares[0] && nextSquares[0] == nextSquares[4] && nextSquares[4] == nextSquares[8]) ||
+    (nextSquares[2] && nextSquares[2] == nextSquares[4] && nextSquares[4] == nextSquares[6])
+    ) {
+      return true;
+  }
+}
+
 export default function Board() {
   const [squares, setSquares] = useState(Array(9).fill(null));
 
   const [isXnext, setIsXnext] = useState(true);
 
   function handleClick(index) {
+    console.log(index);
     const nextSquares = squares.slice();
+    // If there's already a value in the square, cannot be override
+    if (nextSquares[index]) {
+      return;
+    }
     if (isXnext) {
       nextSquares[index] = "X";
     }
@@ -23,6 +44,12 @@ export default function Board() {
     }
     setSquares(nextSquares);
     setIsXnext(!isXnext);
+    if (checkWinner(nextSquares)) {
+      alert("Win");
+    }
+    else {
+      console.log(nextSquares);
+    }
   }
 
   return (
