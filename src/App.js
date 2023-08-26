@@ -8,7 +8,7 @@ function Square({value, onSquareClick}) {
     </button>);
 }
 
-function checkWinner(nextSquares) {
+function checkWinner(squares) {
   const winnerPatterns = [
     [0, 1, 2],
     [3, 4, 5],
@@ -22,8 +22,8 @@ function checkWinner(nextSquares) {
 
   for (let i=0; i < winnerPatterns.length; i++) {
     const [x, y, z] = winnerPatterns[i];
-    if (nextSquares[x] && nextSquares[x] == nextSquares[y] && nextSquares[x] == nextSquares[z]) {
-      return nextSquares[x];
+    if (squares[x] && squares[x] == squares[y] && squares[x] == squares[z]) {
+      return squares[x];
     }
   }
   return null;
@@ -37,7 +37,7 @@ export default function Board() {
   function handleClick(index) {
     console.log(index);
     const nextSquares = squares.slice();
-    const winner = checkWinner(nextSquares);
+    const winner = checkWinner(squares);
     // If there's already a value in the square, cannot be override
     if (nextSquares[index]) {
       return;
