@@ -80,8 +80,8 @@ function Board({ isXnext, squares, onPlay }) {
 export default function Game() {
   const [isXnext, setIsXnext] = useState(true);
   const [historySquares, setHistorySquares] = useState([Array(9).fill(null)]);
-  const currentSquares = historySquares[historySquares.length - 1];
   const [currentMove, setCurrentMove] = useState(0);
+  const currentSquares = historySquares[currentMove];
 
   function handlePlay(nextSquares) {
     const nextHistory = [...historySquares.slice(0, currentMove + 1), nextSquares];
