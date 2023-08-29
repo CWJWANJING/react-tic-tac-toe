@@ -89,7 +89,8 @@ export default function Game() {
   }
 
   function jumpTo(nextMove) {
-    // TODO
+    setCurrentMove(nextMove);
+    setIsXnext(nextMove % 2 === 0);
   }
 
   const moves = historySquares.map((squares, move) => {
